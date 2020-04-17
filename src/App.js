@@ -1,25 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "./app.css";
+
+// Local imports
+import Header from "./components/Header";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Footer from "./components/Footer";
+import Landing from "./pages/Landing";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core";
+import { red, blue } from "@material-ui/core/colors";
+import { UserContext } from "./context/UserContext";
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: red[700],
+    },
+    secondary: {
+      main: blue[500],
+    },
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <ThemeProvider theme={theme}>
+        <UserContext.Provider>
+          <Header />
+          <Switch>
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={Signup} />
+          </Switch>
+          <Footer />
+        </UserContext.Provider>
+      </ThemeProvider>
+    </Router>
   );
 }
 
