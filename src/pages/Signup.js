@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Formik } from "formik";
 
@@ -17,6 +17,8 @@ import Container from "@material-ui/core/Container";
 
 // Local imports
 import { registerValidationSchema } from "../utils/yupValidation";
+import { useDispatch } from "react-redux";
+import { signupUser } from "../redux/actions/userActions";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -42,13 +44,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Login() {
+export default function Signup({ history }) {
+  const [globalError, setGlobalError] = useState("");
+  const dispatch = useDispatch();
   const classes = useStyles();
-  const handleSubmit = (values, actions) => {
+  const handleSubmit = (values, { resetForm, setSubmitting, setErrors }) => {
     // Submit the form
-    setTimeout(() => {
-      actions.setSubmitting(false);
-    }, 5000);
+    const actions = { resetForm, setSubmitting, setErrors, setGlobalError };
+    dispatch(signupUser(values, history, actions));
   };
 
   return (
@@ -60,6 +63,9 @@ export default function Login() {
         </Avatar>
         <Typography component="h1" variant="h5">
           Sign up
+        </Typography>
+        <Typography variant="body2" color="error">
+          {globalError && globalError}
         </Typography>
         <Formik
           validationSchema={registerValidationSchema}
@@ -84,7 +90,6 @@ export default function Login() {
               <TextField
                 variant="outlined"
                 margin="normal"
-                required
                 fullWidth
                 id="email"
                 label="Email Address"
@@ -99,12 +104,10 @@ export default function Login() {
               <TextField
                 variant="outlined"
                 margin="normal"
-                required
                 fullWidth
                 id="username"
                 label="Username"
                 name="username"
-                autoComplete="username"
                 value={values.username}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -114,7 +117,6 @@ export default function Login() {
               <TextField
                 variant="outlined"
                 margin="normal"
-                required
                 fullWidth
                 name="password"
                 label="Password"
@@ -129,11 +131,10 @@ export default function Login() {
               <TextField
                 variant="outlined"
                 margin="normal"
-                required
                 fullWidth
                 name="confirmPassword"
                 label="Confirm Password"
-                type="confirmPassword"
+                type="password"
                 id="confirmPassword"
                 value={values.confirmPassword}
                 onChange={handleChange}

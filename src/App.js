@@ -10,7 +10,7 @@ import Footer from "./components/Footer";
 import Landing from "./pages/Landing";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import { red, blue } from "@material-ui/core/colors";
-import { UserContext } from "./context/UserContext";
+import Dashboard from "./pages/Dashboard";
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -26,15 +26,14 @@ function App() {
   return (
     <Router>
       <ThemeProvider theme={theme}>
-        <UserContext.Provider>
-          <Header />
-          <Switch>
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={Signup} />
-          </Switch>
-          <Footer />
-        </UserContext.Provider>
+        <Header />
+        <Switch>
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} />
+        </Switch>
+        <Footer />
       </ThemeProvider>
     </Router>
   );

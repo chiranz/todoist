@@ -11,6 +11,8 @@ import Menu from "@material-ui/core/Menu";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { Container } from "@material-ui/core";
+import { useSelector, useDispatch } from "react-redux";
+import { logoutUser } from "../redux/actions/userActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,8 +28,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Header() {
+  const auth = useSelector((state) => state.user.authenticated);
   const classes = useStyles();
-  const [auth] = React.useState(false);
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -56,7 +59,7 @@ export default function Header() {
               variant="h6"
               className={classes.title}
               component={Link}
-              to="/"
+              to="/dashboard"
               color="inherit"
             >
               Todoist
@@ -88,7 +91,9 @@ export default function Header() {
                   onClose={handleClose}
                 >
                   <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
+                  <MenuItem onClick={() => dispatch(logoutUser())}>
+                    Logout
+                  </MenuItem>
                 </Menu>
               </div>
             ) : (

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Formik } from "formik";
+import { useDispatch } from "react-redux";
 
 // MUI imports
 import Avatar from "@material-ui/core/Avatar";
@@ -17,6 +18,7 @@ import Container from "@material-ui/core/Container";
 
 // Local imports
 import { loginValidationSchema } from "../utils/yupValidation";
+import { loginUser } from "../redux/actions/userActions";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -42,13 +44,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Login() {
+export default function Login({ history }) {
+  const [globalError, setGlobalError] = useState("");
   const classes = useStyles();
-  const handleSubmit = (values, actions) => {
+  const dispatch = useDispatch();
+  const handleSubmit = (values, { resetForm, setSubmitting, setErrors }) => {
     // Submit the form
-    setTimeout(() => {
-      actions.setSubmitting(false);
-    }, 5000);
+    const actions = { resetForm, setSubmitting, setErrors, setGlobalError };
+    dispatch(loginUser(values, history, actions));
   };
 
   return (
@@ -60,6 +63,9 @@ export default function Login() {
         </Avatar>
         <Typography component="h1" variant="h5">
           Sign in
+        </Typography>
+        <Typography variant="body2" color="error">
+          {globalError && globalError}
         </Typography>
         <Formik
           validationSchema={loginValidationSchema}
@@ -79,7 +85,6 @@ export default function Login() {
               <TextField
                 variant="outlined"
                 margin="normal"
-                required
                 fullWidth
                 id="email"
                 label="Email Address"
@@ -94,7 +99,6 @@ export default function Login() {
               <TextField
                 variant="outlined"
                 margin="normal"
-                required
                 fullWidth
                 name="password"
                 label="Password"
