@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.primary.dark,
+    backgroundColor: theme.palette.success.dark,
   },
   form: {
     width: "100%", // Fix IE 11 issue.

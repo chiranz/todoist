@@ -1,4 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+// MUI imports
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -8,10 +11,10 @@ import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
-import { Container } from "@material-ui/core";
-import { useSelector, useDispatch } from "react-redux";
+// Local Imports
 import { logoutUser } from "../redux/actions/userActions";
 
 const useStyles = makeStyles((theme) => ({
@@ -24,10 +27,12 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
     textDecoration: "none",
+    fontWeight: "bold",
   },
 }));
 
 export default function Header() {
+  const smallScreen = useMediaQuery("(max-width:756px)");
   const auth = useSelector((state) => state.user.authenticated);
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -44,25 +49,27 @@ export default function Header() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar color="transparent" position="static">
         <Container maxWidth="lg">
           <Toolbar>
-            <IconButton
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="menu"
-            >
-              <MenuIcon />
-            </IconButton>
+            {smallScreen && (
+              <IconButton
+                edge="start"
+                className={classes.menuButton}
+                color="inherit"
+                aria-label="menu"
+              >
+                <MenuIcon />
+              </IconButton>
+            )}
             <Typography
-              variant="h6"
+              variant="h5"
               className={classes.title}
               component={Link}
-              to="/dashboard"
-              color="inherit"
+              to={auth ? "/dashboard" : "/"}
+              color="primary"
             >
-              Todoist
+              todoist
             </Typography>
             {auth ? (
               <div>
@@ -101,7 +108,7 @@ export default function Header() {
                 <Button component={Link} to="/login" color="inherit">
                   Login
                 </Button>
-                <Button component={Link} to="/signup" color="inherit">
+                <Button component={Link} to="/signup" color="primary">
                   Signup
                 </Button>
               </div>
