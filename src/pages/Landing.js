@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 import backgroundImage from "../images/landing.png";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   backgroundImage: {
     display: "flex",
     alignItems: "center",
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     background: `url(${backgroundImage})`,
     backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
+    backgroundSize: "contain",
     backgroundPositionY: "16rem",
   },
   centered: {
@@ -59,16 +59,6 @@ export default function Landing() {
             Get Started
           </Typography>
         </Button>
-      </div>
-      <div className={classes.centered}>
-        <Typography className={classes.heading} variant="h2" gutterBottom>
-          Free up your mental space
-        </Typography>
-        <Typography variant="body1">
-          Regain clarity and calmness by getting all those tasks out of your
-          head and <br /> onto your to-do list (no matter where you are or what
-          device you use).
-        </Typography>
       </div>
     </Container>
   );

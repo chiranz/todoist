@@ -16,6 +16,7 @@ import Container from "@material-ui/core/Container";
 import Button from "@material-ui/core/Button";
 // Local Imports
 import { logoutUser } from "../redux/actions/userActions";
+import logoImage from "../images/todoist.png";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,6 +29,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     textDecoration: "none",
     fontWeight: "bold",
+  },
+  brand: {
+    height: "2rem",
   },
 }));
 
@@ -69,7 +73,7 @@ export default function Header() {
               to={auth ? "/dashboard" : "/"}
               color="primary"
             >
-              todoist
+              <img className={classes.brand} src={logoImage} alt="logo" />
             </Typography>
             {auth ? (
               <div>

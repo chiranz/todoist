@@ -21,7 +21,7 @@ export default function Dashboard() {
     if (authenticated) {
       dispatch(getAllProjects());
       dispatch(getAllTasks());
-    }
+    } 
   }, [dispatch, authenticated]);
 
   const classes = useStyles();

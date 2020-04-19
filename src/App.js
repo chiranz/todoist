@@ -37,6 +37,9 @@ let theme = createMuiTheme({
 });
 theme = responsiveFontSizes(theme);
 
+Axios.defaults.baseURL =
+  "https://asia-east2-todoist-c686b.cloudfunctions.net/api";
+
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
