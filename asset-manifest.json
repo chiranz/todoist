@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/todoist/static/css/main.c058007a.chunk.css",
+    "main.js": "/todoist/static/js/main.2ddfecda.chunk.js",
+    "main.js.map": "/todoist/static/js/main.2ddfecda.chunk.js.map",
+    "runtime-main.js": "/todoist/static/js/runtime-main.8d1c3457.js",
+    "runtime-main.js.map": "/todoist/static/js/runtime-main.8d1c3457.js.map",
+    "static/js/2.f7fbe6b5.chunk.js": "/todoist/static/js/2.f7fbe6b5.chunk.js",
+    "static/js/2.f7fbe6b5.chunk.js.map": "/todoist/static/js/2.f7fbe6b5.chunk.js.map",
+    "index.html": "/todoist/index.html",
+    "precache-manifest.05495cfb2f458e59631bcaa3179d5af1.js": "/todoist/precache-manifest.05495cfb2f458e59631bcaa3179d5af1.js",
+    "service-worker.js": "/todoist/service-worker.js",
+    "static/css/main.c058007a.chunk.css.map": "/todoist/static/css/main.c058007a.chunk.css.map",
+    "static/js/2.f7fbe6b5.chunk.js.LICENSE.txt": "/todoist/static/js/2.f7fbe6b5.chunk.js.LICENSE.txt",
+    "static/media/landing.png": "/todoist/static/media/landing.0a0b9c0a.png",
+    "static/media/todoist.png": "/todoist/static/media/todoist.72927dc1.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8d1c3457.js",
+    "static/js/2.f7fbe6b5.chunk.js",
+    "static/css/main.c058007a.chunk.css",
+    "static/js/main.2ddfecda.chunk.js"
+  ]
+}
