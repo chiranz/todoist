@@ -2,7 +2,7 @@ import { SET_AUTHENTICATED, SET_USER, SET_UNAUTHENTICATED } from "../types";
 
 const initialState = {
   token: null,
-  authenticated: false,
+  authenticated: null,
   credentials: null,
 };
 
@@ -17,7 +17,10 @@ export default (state = initialState, action) => {
     case SET_USER:
       return { ...state, credentials: action.payload };
     case SET_UNAUTHENTICATED:
-      return initialState;
+      return {
+        ...initialState,
+        authenticated: false,
+      };
     default:
       return state;
   }

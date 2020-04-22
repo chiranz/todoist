@@ -4,7 +4,6 @@ import { SET_TASKS, SET_PROJECTS } from "../types";
 export const getAllTasks = () => async (dispatch) => {
   await Axios.get("/tasks")
     .then((res) => {
-      console.log(Axios.defaults.headers);
       dispatch({
         type: SET_TASKS,
         payload: res.data,

@@ -1,29 +1,22 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
-import "./app.css";
+import { BrowserRouter as Router } from "react-router-dom";
+import { createBrowserHistory } from "history";
 import Axios from "axios";
 
-// Local imports
-
-import Header from "./components/Header";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import Footer from "./components/Footer";
-import Landing from "./pages/Landing";
+import { red, blue } from "@material-ui/core/colors";
 import {
-  createMuiTheme,
   ThemeProvider,
+  createMuiTheme,
   responsiveFontSizes,
 } from "@material-ui/core";
-import { red, blue } from "@material-ui/core/colors";
-import Dashboard from "./pages/Dashboard";
-import AuthRoute from "./routes/AuthRoute";
 import { useDispatch } from "react-redux";
 import JwtDecode from "jwt-decode";
+
+// Local imports
+import "./app.css";
 import { logoutUser } from "./redux/actions/userActions";
 import { SET_AUTHENTICATED } from "./redux/types";
-import GuestRoute from "./routes/GuestRoute";
-// API Base url setup
+import Routes from "./Routes";
 
 let theme = createMuiTheme({
   palette: {
@@ -37,8 +30,11 @@ let theme = createMuiTheme({
 });
 theme = responsiveFontSizes(theme);
 
+// API Base url setup
 Axios.defaults.baseURL =
   "https://asia-east2-todoist-c686b.cloudfunctions.net/api";
+
+const browserHistory = createBrowserHistory();
 
 function App() {
   const dispatch = useDispatch();
@@ -58,16 +54,9 @@ function App() {
     }
   }, [dispatch]);
   return (
-    <Router>
+    <Router history={browserHistory}>
       <ThemeProvider theme={theme}>
-        <Header />
-        <Switch>
-          <GuestRoute exact path="/" component={Landing} />
-          <AuthRoute exact path="/dashboard" component={Dashboard} />
-          <GuestRoute exact path="/login" component={Login} />
-          <GuestRoute exact path="/signup" component={Signup} />
-        </Switch>
-        <Footer />
+        <Routes />
       </ThemeProvider>
     </Router>
   );
