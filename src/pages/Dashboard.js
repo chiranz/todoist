@@ -1,10 +1,7 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 // MUI Imports
 import Container from "@material-ui/core/Container";
-// Local imports
-import { getAllProjects, getAllTasks } from "../redux/actions/dataActions";
 
 const useStyles = makeStyles((theme) => ({
   centered: {
@@ -17,15 +14,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Dashboard() {
-  const { authenticated } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (authenticated) {
-      dispatch(getAllProjects());
-      dispatch(getAllTasks());
-    }
-  }, [dispatch, authenticated]);
-
   const classes = useStyles();
 
   return (

@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
   },
   divider: {
-    margin: theme.spacing(2, 0),
+    marginTop: theme.spacing(1),
   },
   nav: {
     marginBottom: theme.spacing(2),
